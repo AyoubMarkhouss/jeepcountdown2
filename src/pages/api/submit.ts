@@ -1,17 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { google } from "googleapis";
 
-import Cors from "cors";
-import initMiddleware from "../../../lib/init-middleware";
-
-const cors = initMiddleware(
-  Cors({
-    // Allow requests from your Next.js app's origin
-    origin: process.env.NEXT_PUBLIC_APP_ORIGIN || "*",
-    // Other options can be added here as needed
-    methods: ["GET", "POST"], // Allow only specific HTTP methods
-  })
-);
 
 type SheetForm = {
   nom: string;
@@ -25,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  await cors(req, res);
+  
 
   if (req.method !== "POST") {
     return res.status(405).send({ message: "Only POST requests are allowed" });
